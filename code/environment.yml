@@ -1,4 +1,4 @@
-name: decdiff
+name: decdiff_v2
 channels:
 - defaults
 - conda-forge
@@ -27,6 +27,6 @@ dependencies:
     - jax <= 0.2.21
     - ray==1.9.1
     - crcmod # for fast gsutil rsync on large files
-    - ml_logger==0.8.69 
+#    - ml_logger==0.8.69 
     - jaynes==0.8.11 
     - params_proto==2.9.6
