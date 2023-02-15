@@ -14,7 +14,7 @@ dependencies:
     - matplotlib==3.3.4
     - torch==1.9.1+cu111
     - typed-argument-parser
-    - git+https://github.com/Farama-Foundation/d4rl@master#egg=d4rl
+#    - git+https://github.com/Farama-Foundation/d4rl@master#egg=d4rl
     - scikit-image==0.17.2
     - scikit-video==1.1.11
     - gitpython
