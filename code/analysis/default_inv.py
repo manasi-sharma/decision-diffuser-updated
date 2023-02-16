@@ -15,7 +15,7 @@ with Sweep(RUN, Config) as sweep:
     Config.diffusion = 'models.GaussianInvDynDiffusion'
 
     with sweep.product:
-        Config.n_train_steps = [1] #[1e6]
+        Config.n_train_steps = [1e6]
         Config.dataset = ['hopper-medium-expert-v2']
         Config.returns_scale = [400.0]
 
