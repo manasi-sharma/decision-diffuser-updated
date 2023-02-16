@@ -15,6 +15,7 @@ if __name__ == '__main__':
     for kwargs in sweep:
         logger.print(RUN.prefix, color='green')
         jaynes.config("local")
+        import pdb;pdb.set_trace()
         thunk = instr(main, **kwargs)
         jaynes.run(thunk)
 
