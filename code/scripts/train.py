@@ -1,3 +1,6 @@
+import sys
+sys.path.append('/iliad/u/manasis/decision-diffuser-updated/code/')
+
 import diffuser.utils as utils
 import torch
 from time import time
