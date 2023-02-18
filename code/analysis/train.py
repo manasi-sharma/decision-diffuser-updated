@@ -17,4 +17,4 @@ if __name__ == '__main__':
         thunk = instr(main, **kwargs)
         jaynes.run(thunk)
 
-    jaynes.listen()
+    #jaynes.listen()
