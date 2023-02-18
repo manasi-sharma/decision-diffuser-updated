@@ -6,6 +6,7 @@ import einops
 import pdb
 import diffuser
 from copy import deepcopy
+from time import time
 
 from .arrays import batch_to_device, to_np, to_device, apply_dict
 from .timer import Timer
@@ -113,7 +114,9 @@ class Trainer(object):
             for i in range(self.gradient_accumulate_every):
                 batch = next(self.dataloader)
                 batch = batch_to_device(batch, device=self.device)
+                t1= time()
                 loss, infos = self.model.loss(*batch)
+                print("\n\n\nLOSS TIME: ", time()-t1, "\n\n\n")
                 loss = loss / self.gradient_accumulate_every
                 loss.backward()
 
