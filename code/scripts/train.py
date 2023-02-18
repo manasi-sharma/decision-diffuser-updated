@@ -171,8 +171,10 @@ def main(**deps):
 
     n_epochs = int(Config.n_train_steps // Config.n_steps_per_epoch)
 
+    print("\n\n\nyo\n\n\n")
     for i in range(n_epochs):
         t1= time()
+        print("\n\nhiii\n\n")
         logger.print(f'Epoch {i} / {n_epochs} | {logger.prefix}')
         trainer.train(n_train_steps=Config.n_steps_per_epoch)
         print("\n\n\ntime: ", time() - t1, "\n\n\n")
