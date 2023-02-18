@@ -132,7 +132,7 @@ class Trainer(object):
                 metrics = {k:v.detach().item() for k, v in infos.items()}
                 metrics['steps'] = self.step
                 metrics['loss'] = loss.detach().item()
-                logger.log_metrics_summary(metrics, default_stats='mean')
+                #logger.log_metrics_summary(metrics, default_stats='mean')
 
             """"if self.step == 0 and self.sample_freq:
                 self.render_reference(self.n_reference)
