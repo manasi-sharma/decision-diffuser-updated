@@ -1,5 +1,6 @@
 import diffuser.utils as utils
 import torch
+from time import time
 
 def main(**deps):
     from ml_logger import logger, RUN
@@ -172,6 +173,8 @@ def main(**deps):
     import pdb;pdb.set_trace()
 
     for i in range(n_epochs):
+        t1= time()
         logger.print(f'Epoch {i} / {n_epochs} | {logger.prefix}')
         trainer.train(n_train_steps=Config.n_steps_per_epoch)
-
+        print("time: ", time() - t1)
+        break
