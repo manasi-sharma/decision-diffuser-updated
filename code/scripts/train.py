@@ -179,3 +179,6 @@ def main(**deps):
         trainer.train(n_train_steps=Config.n_steps_per_epoch)
         print("\n\n\ntime: ", time() - t1, "\n\n\n")
         break
+
+if __name__ == "__main__":
+    main()
