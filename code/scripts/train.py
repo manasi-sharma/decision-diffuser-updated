@@ -170,7 +170,6 @@ def main(**deps):
     # -----------------------------------------------------------------------------#
 
     n_epochs = int(Config.n_train_steps // Config.n_steps_per_epoch)
-    import pdb;pdb.set_trace()
 
     for i in range(n_epochs):
         t1= time()
