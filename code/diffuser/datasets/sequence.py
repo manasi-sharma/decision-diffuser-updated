@@ -92,6 +92,7 @@ class SequenceDataset(torch.utils.data.Dataset):
 
         conditions = self.get_conditions(observations)
         trajectories = np.concatenate([actions, observations], axis=-1)
+        print("\n\n\nLOSS TIME: ", time()-t1, "\n\n\n")
 
         if self.include_returns:
             rewards = self.fields.rewards[path_ind, start:]
@@ -102,7 +103,6 @@ class SequenceDataset(torch.utils.data.Dataset):
         else:
             batch = Batch(trajectories, conditions)
 
-        print("\n\n\nLOSS TIME: ", time()-t1, "\n\n\n")
         return batch
 
 class CondSequenceDataset(torch.utils.data.Dataset):
