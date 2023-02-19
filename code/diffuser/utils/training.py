@@ -112,11 +112,11 @@ class Trainer(object):
         timer = Timer()
         for step in range(n_train_steps):
             for i in range(self.gradient_accumulate_every):
-                t1 = time()
                 batch = next(self.dataloader)
-                print("\n\n\nLOSS TIME: ", time()-t1, "\n\n\n")
                 batch = batch_to_device(batch, device=self.device)
+                t1 = time()
                 loss, infos = self.model.loss(*batch)
+                print("\n\n\nLOSS TIME: ", time()-t1, "\n\n\n")
                 loss = loss / self.gradient_accumulate_every
                 loss.backward()
 
