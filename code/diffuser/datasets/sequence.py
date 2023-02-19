@@ -95,10 +95,10 @@ class SequenceDataset(torch.utils.data.Dataset):
         if self.include_returns:
             rewards = self.fields.rewards[path_ind, start:]
             discounts = self.discounts[:len(rewards)]
-            returns = (discounts * rewards).sum()
             t1 = time()
-            returns = np.array([returns/self.returns_scale], dtype=np.float32)
+            returns = (discounts * rewards).sum()
             print("\n\n\nLOSS TIME: ", time()-t1, "\n\n\n")
+            returns = np.array([returns/self.returns_scale], dtype=np.float32)
             batch = RewardBatch(trajectories, conditions, returns)
         else:
             batch = Batch(trajectories, conditions)
