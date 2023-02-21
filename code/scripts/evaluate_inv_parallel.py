@@ -8,6 +8,7 @@ import gym
 from config.locomotion_config import Config
 from diffuser.utils.arrays import to_torch, to_np, to_device
 from diffuser.datasets.d4rl import suppress_output
+from time import time
 
 def evaluate(**deps):
     from ml_logger import logger, RUN
@@ -146,10 +147,12 @@ def evaluate(**deps):
         obs = dataset.normalizer.normalize(obs, 'observations')
         conditions = {0: to_torch(obs, device=device)}
         import pdb;pdb.set_trace()
+        t1 = time()
         samples = trainer.ema_model.conditional_sample(conditions, returns=returns)
         obs_comb = torch.cat([samples[:, 0, :], samples[:, 1, :]], dim=-1)
         obs_comb = obs_comb.reshape(-1, 2*observation_dim)
         action = trainer.ema_model.inv_model(obs_comb)
+        print("\n\n\ntime diff: ", time()-t1)
         import pdb;pdb.set_trace()
 
         samples = to_np(samples)
