@@ -85,14 +85,14 @@ class Trainer(object):
         tmp_dl = torch.utils.data.DataLoader(
             self.dataset, batch_size=train_batch_size, num_workers=0, shuffle=True, pin_memory=True
         )
-        t1 = time()
+        #t1 = time()
         i = 0
         for b in tmp_dl:
             i += 1
             if i == 1000:
                 break
-        print("\n\n\nTIMEEE: ", time() - t1)
-        import pdb;pdb.set_trace()
+        #print("\n\n\nTIMEEE: ", time() - t1)
+        #import pdb;pdb.set_trace()
                 
 
         self.dataloader_vis = cycle(torch.utils.data.DataLoader(
