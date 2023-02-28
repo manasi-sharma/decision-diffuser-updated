@@ -181,7 +181,6 @@ def main(**deps):
         logger.print(f'Epoch {i} / {n_epochs} | {logger.prefix}')
         trainer.train(n_train_steps=Config.n_steps_per_epoch)
         #print("\n\n\ntime: ", time() - t1, "\n\n\n")
-        break
 
 if __name__ == "__main__":
     main()
