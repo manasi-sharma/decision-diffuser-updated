@@ -216,7 +216,9 @@ class TemporalUnet(nn.Module):
                 returns_embed = mask*returns_embed
             if force_dropout:
                 returns_embed = 0*returns_embed
+            #t = torch.cat([t, returns_embed], dim=-1)
             t = torch.cat([t, returns_embed], dim=-1)
+            import pdb;pdb.set_trace()
 
         h = []
 
@@ -266,7 +268,9 @@ class TemporalUnet(nn.Module):
                 returns_embed = mask*returns_embed
             if force_dropout:
                 returns_embed = 0*returns_embed
+            #t = torch.cat([t, returns_embed], dim=-1)
             t = torch.cat([t, returns_embed], dim=-1)
+            import pdb;pdb.set_trace()
 
         h = []
 
