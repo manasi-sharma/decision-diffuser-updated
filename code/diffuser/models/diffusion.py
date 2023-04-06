@@ -501,6 +501,7 @@ class GaussianInvDynDiffusion(nn.Module):
         return loss, info
 
     def loss(self, x, cond, returns=None):
+        import pdb;pdb.set_trace()
         if self.train_only_inv:
             # Calculating inv loss
             x_t = x[:, :-1, self.action_dim:]
