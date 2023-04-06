@@ -162,11 +162,11 @@ def main(**deps):
 
     utils.report_parameters(model)
 
-    logger.print('Testing forward...', end=' ', flush=True)
+    """logger.print('Testing forward...', end=' ', flush=True)
     batch = utils.batchify(dataset[0], Config.device)
     loss, _ = diffusion.loss(*batch)
     loss.backward()
-    logger.print('✓')
+    logger.print('✓')"""
 
     # -----------------------------------------------------------------------------#
     # --------------------------------- main loop ---------------------------------#
