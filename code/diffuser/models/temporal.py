@@ -196,8 +196,8 @@ class TemporalUnet(nn.Module):
             nn.Conv1d(dim, transition_dim, 1),
         )
         
-        self.multihead_attn_1 = nn.MultiheadAttention(embed_dim=128, num_heads=4)
-        self.multihead_attn_2 = nn.MultiheadAttention(embed_dim=128, num_heads=4)
+        #self.multihead_attn_1 = nn.MultiheadAttention(embed_dim=128, num_heads=4)
+        #self.multihead_attn_2 = nn.MultiheadAttention(embed_dim=128, num_heads=4)
 
     def forward(self, x, cond, time, returns=None, use_dropout=True, force_dropout=False):
         '''
@@ -221,10 +221,10 @@ class TemporalUnet(nn.Module):
                 returns_embed = 0*returns_embed
             
             returns_embed_reshaped = returns_embed.reshape(1, 1, -1).cpu()
-            t_reshaped = t.reshape(1, 1, -1).cpu()
-            attn_output, attn_output_weights = self.multihead_attn_1(query=returns_embed_reshaped, key=t_reshaped, value=t_reshaped)
-            t = attn_output.squeeze(0).to(torch.device('cuda:0'))
-            #t = torch.cat([t, returns_embed], dim=-1)
+            #t_reshaped = t.reshape(1, 1, -1).cpu()
+            #attn_output, attn_output_weights = self.multihead_attn_1(query=returns_embed_reshaped, key=t_reshaped, value=t_reshaped)
+            #t = attn_output.squeeze(0).to(torch.device('cuda:0'))
+            t = torch.cat([t, returns_embed], dim=-1)
             #import pdb;pdb.set_trace()
             #t = torch.cat([t, returns_embed], dim=-1)
             #import pdb;pdb.set_trace()
@@ -279,10 +279,10 @@ class TemporalUnet(nn.Module):
                 returns_embed = 0*returns_embed
             
             returns_embed_reshaped = returns_embed.reshape(1, 1, -1).cpu()
-            t_reshaped = t.reshape(1, 1, -1).cpu()
-            attn_output, attn_output_weights = self.multihead_attn_2(query=returns_embed_reshaped, key=t_reshaped, value=t_reshaped)
-            t = attn_output.squeeze(0).to(torch.device('cuda:0'))
-            #t = torch.cat([t, returns_embed], dim=-1)
+            #t_reshaped = t.reshape(1, 1, -1).cpu()
+            #attn_output, attn_output_weights = self.multihead_attn_2(query=returns_embed_reshaped, key=t_reshaped, value=t_reshaped)
+            #t = attn_output.squeeze(0).to(torch.device('cuda:0'))
+            t = torch.cat([t, returns_embed], dim=-1)
             #import pdb;pdb.set_trace()
             #t = torch.cat([t, returns_embed], dim=-1)
             #import pdb;pdb.set_trace()
