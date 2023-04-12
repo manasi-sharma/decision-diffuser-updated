@@ -198,3 +198,6 @@ def evaluate(**deps):
 
     logger.print(f"average_ep_reward: {np.mean(episode_rewards)}, std_ep_reward: {np.std(episode_rewards)}", color='green')
     logger.log_metrics_summary({'average_ep_reward':np.mean(episode_rewards), 'std_ep_reward':np.std(episode_rewards)})
+
+if __name__ == "__main__":
+    evaluate()
