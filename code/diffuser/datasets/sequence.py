@@ -97,7 +97,6 @@ class SequenceDataset(torch.utils.data.Dataset):
 
         conditions = self.get_conditions(observations)
         trajectories = np.concatenate([actions, observations], axis=-1)
-        import pdb;pdb.set_trace()
 
         if self.include_returns:
             rewards = self.fields.rewards[path_ind, start:]
