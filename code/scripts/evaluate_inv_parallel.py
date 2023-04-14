@@ -147,17 +147,17 @@ def evaluate(**deps):
     recorded_obs = [deepcopy(obs[:, None])]
 
     while sum(dones) <  num_eval:
-        import pdb;pdb.set_trace()
+        #import pdb;pdb.set_trace()
         obs = dataset.normalizer.normalize(obs, 'observations')
         conditions = {0: to_torch(obs, device=device)}
-        import pdb;pdb.set_trace()
+        #import pdb;pdb.set_trace()
         t1 = time()
         samples = trainer.ema_model.conditional_sample(conditions, returns=returns)
         obs_comb = torch.cat([samples[:, 0, :], samples[:, 1, :]], dim=-1)
         obs_comb = obs_comb.reshape(-1, 2*observation_dim)
         action = trainer.ema_model.inv_model(obs_comb)
-        print("\n\n\ntime diff: ", time()-t1)
-        import pdb;pdb.set_trace()
+        #print("\n\n\ntime diff: ", time()-t1)
+        #import pdb;pdb.set_trace()
 
         samples = to_np(samples)
         action = to_np(action)
