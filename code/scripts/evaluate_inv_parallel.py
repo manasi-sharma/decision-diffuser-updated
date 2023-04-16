@@ -148,7 +148,7 @@ def evaluate(**deps):
     recorded_obs = [deepcopy(obs[:, None])]
 
     while sum(dones) <  num_eval:
-        t1 = time()
+        #t1 = time()
 
         #import pdb;pdb.set_trace()
         obs = dataset.normalizer.normalize(obs, 'observations')
@@ -175,6 +175,7 @@ def evaluate(**deps):
         obs_list = []
         for i in range(num_eval):
             this_obs, this_reward, this_done, _ = env_list[i].step(action[i])
+            print("reward: ", this_reward)
             obs_list.append(this_obs[None])
             if this_done:
                 if dones[i] == 1:
@@ -189,11 +190,13 @@ def evaluate(**deps):
                 else:
                     episode_rewards[i] += this_reward
 
-        print("\n\n\ntime for 1 run: ", time()-t1)
+        #print("\n\n\ntime for 1 run: ", time()-t1)
 
         obs = np.concatenate(obs_list, axis=0)
         recorded_obs.append(deepcopy(obs[:, None]))
         t += 1
+
+    print("\n\nFinal t: ", t)
 
     recorded_obs = np.concatenate(recorded_obs, axis=1)
     savepath = os.path.join('images', f'sample-executed.png')
