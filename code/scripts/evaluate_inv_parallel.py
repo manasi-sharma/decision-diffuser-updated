@@ -11,6 +11,7 @@ import gym
 from config.locomotion_config import Config
 from diffuser.utils.arrays import to_torch, to_np, to_device
 from diffuser.datasets.d4rl import suppress_output
+
 from time import time
 
 def evaluate(**deps):
@@ -147,11 +148,12 @@ def evaluate(**deps):
     recorded_obs = [deepcopy(obs[:, None])]
 
     while sum(dones) <  num_eval:
+        t1 = time()
+
         #import pdb;pdb.set_trace()
         obs = dataset.normalizer.normalize(obs, 'observations')
         conditions = {0: to_torch(obs, device=device)}
         #import pdb;pdb.set_trace()
-        t1 = time()
         samples = trainer.ema_model.conditional_sample(conditions, returns=returns, verbose=False)
         obs_comb = torch.cat([samples[:, 0, :], samples[:, 1, :]], dim=-1)
         obs_comb = obs_comb.reshape(-1, 2*observation_dim)
@@ -164,11 +166,11 @@ def evaluate(**deps):
 
         action = dataset.normalizer.unnormalize(action, 'actions')
 
-        if t == 0:
+        """if t == 0:
             normed_observations = samples[:, :, :]
             observations = dataset.normalizer.unnormalize(normed_observations, 'observations')
             savepath = os.path.join('images', 'sample-planned.png')
-            renderer.composite(savepath, observations)
+            renderer.composite(savepath, observations)"""
 
         obs_list = []
         for i in range(num_eval):
@@ -186,6 +188,8 @@ def evaluate(**deps):
                     pass
                 else:
                     episode_rewards[i] += this_reward
+
+        print("\n\n\ntime for 1 run: ", time()-t1)
 
         obs = np.concatenate(obs_list, axis=0)
         recorded_obs.append(deepcopy(obs[:, None]))
