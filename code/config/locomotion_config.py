@@ -7,12 +7,12 @@ class Config(ParamsProto):
     seed = 100
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     bucket = '/iliad/u/manasis/decision-diffuser-updated/code/weights/'
-    dataset = 'hopper-medium-expert-v2'
+    dataset = 'kitchen-mixed-v0' #'hopper-medium-expert-v2'
 
     ## model
     model = 'models.TemporalUnet'
     diffusion = 'models.GaussianInvDynDiffusion'
-    horizon = 100
+    horizon = 56 #100
     n_diffusion_steps = 200
     action_weight = 10
     loss_weights = None
