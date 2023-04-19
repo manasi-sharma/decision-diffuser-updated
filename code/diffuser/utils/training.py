@@ -177,9 +177,9 @@ class Trainer(object):
         os.makedirs(savepath, exist_ok=True)
         # logger.save_torch(data, savepath)
         if self.save_checkpoints:
-            savepath = os.path.join(savepath, f'state_kitchen_mixed_test2_{self.step}.pt')
+            savepath = os.path.join(savepath, f'state_kitchen_partial_test2_{self.step}.pt')
         else:
-            savepath = os.path.join(savepath, 'state_kitchen_mixed_test2.pt')
+            savepath = os.path.join(savepath, 'state_kitchen_partial_test2.pt')
         torch.save(data, savepath)
         logger.print(f'[ utils/training ] Saved model to {savepath}')
 
@@ -187,7 +187,7 @@ class Trainer(object):
         '''
             loads model and ema from disk
         '''
-        loadpath = os.path.join(self.bucket, logger.prefix, f'checkpoint/state_attn.pt')
+        loadpath = os.path.join(self.bucket, logger.prefix, f'checkpoint/state_kitchen_partial_test2.pt')
         # data = logger.load_torch(loadpath)
         data = torch.load(loadpath)
 
