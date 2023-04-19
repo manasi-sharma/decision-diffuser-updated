@@ -128,7 +128,6 @@ class Trainer(object):
         for step in range(n_train_steps):
             for i in range(self.gradient_accumulate_every):
                 batch = next(self.dataloader)
-                import pdb;pdb.set_trace()
                 batch = batch_to_device(batch, device=self.device)
                 loss, infos = self.model.loss(*batch)
                 loss = loss / self.gradient_accumulate_every
@@ -178,9 +177,9 @@ class Trainer(object):
         os.makedirs(savepath, exist_ok=True)
         # logger.save_torch(data, savepath)
         if self.save_checkpoints:
-            savepath = os.path.join(savepath, f'state_attn_{self.step}.pt')
+            savepath = os.path.join(savepath, f'state_kitchen_mixed_test2_{self.step}.pt')
         else:
-            savepath = os.path.join(savepath, 'state_attn.pt')
+            savepath = os.path.join(savepath, 'state_kitchen_mixed_test2.pt')
         torch.save(data, savepath)
         logger.print(f'[ utils/training ] Saved model to {savepath}')
 
