@@ -37,7 +37,7 @@ def evaluate(**deps):
     if Config.save_checkpoints:
         loadpath = os.path.join(loadpath, f'state_{self.step}.pt')
     else:
-        loadpath = os.path.join(loadpath, 'state_kitchen_mixed_test2.pt')
+        loadpath = os.path.join(loadpath, 'state_kitchen_partial_test2.pt')
     
     state_dict = torch.load(loadpath, map_location=Config.device)
 
