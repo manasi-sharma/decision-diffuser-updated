@@ -37,7 +37,7 @@ def evaluate(**deps):
     if Config.save_checkpoints:
         loadpath = os.path.join(loadpath, f'state_{self.step}.pt')
     else:
-        loadpath = os.path.join(loadpath, 'state.pt')
+        loadpath = os.path.join(loadpath, 'state_kitchen_mixed_test2.pt')
     
     state_dict = torch.load(loadpath, map_location=Config.device)
 
@@ -148,18 +148,12 @@ def evaluate(**deps):
     recorded_obs = [deepcopy(obs[:, None])]
 
     while sum(dones) <  num_eval:
-        #t1 = time()
-
-        #import pdb;pdb.set_trace()
         obs = dataset.normalizer.normalize(obs, 'observations')
         conditions = {0: to_torch(obs, device=device)}
-        #import pdb;pdb.set_trace()
         samples = trainer.ema_model.conditional_sample(conditions, returns=returns, verbose=False)
         obs_comb = torch.cat([samples[:, 0, :], samples[:, 1, :]], dim=-1)
         obs_comb = obs_comb.reshape(-1, 2*observation_dim)
         action = trainer.ema_model.inv_model(obs_comb)
-        #print("\n\n\ntime diff: ", time()-t1)
-        #import pdb;pdb.set_trace()
 
         samples = to_np(samples)
         action = to_np(action)
@@ -189,8 +183,6 @@ def evaluate(**deps):
                     pass
                 else:
                     episode_rewards[i] += this_reward
-
-        #print("\n\n\ntime for 1 run: ", time()-t1)
 
         obs = np.concatenate(obs_list, axis=0)
         recorded_obs.append(deepcopy(obs[:, None]))
